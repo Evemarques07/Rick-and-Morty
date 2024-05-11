@@ -1,0 +1,71 @@
+body{
+    background-color: rgb(85, 152, 162);
+}
+.VerMais {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #4CAF50; 
+    color: white; 
+    border: none; 
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s; 
+}
+
+.VerMais:hover {
+    background-color: #45a049; 
+}
+
+#formulario {
+    max-width: 700px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+#cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    max-width: 90vw;
+    margin: 0px auto;
+    border-radius: 30%;
+}
+.card{
+    display: flex;
+    background-color: black;
+    border-radius: 6px;
+    padding: 5px;
+    gap: 10px;
+}
+img{
+    border-radius: 8px;
+    max-width: 200px;
+}
+p{
+    color: rgb(255, 233, 45);
+}
+h2{
+    color: rgb(85, 152, 162);
+}
+
+.nome{
+    color: #fff;
+}
+
+.spanNome{
+    font-size: 16px;
+    color: rgb(85, 152, 162);
+}
+.spanEspecie{
+    color: rgb(85, 152, 162);
+}
+.spanStatus{
+    color: rgb(85, 152, 162);
+}
+.spanLoc{
+    color: rgb(85, 152, 162);
+}
