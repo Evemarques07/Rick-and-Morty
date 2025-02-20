@@ -1,25 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./style.css">
-</head>
-<body>
-    <h1>Rick and Morty</h1>
-    <form id="formulario">
-        <label for="usuario">Nome Personagem</label>
-        <input type="text" name="personagem" id="usuario" placeholder="Digite o nome do personagem">
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rick and Morty</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+
+  <body>
+    <header>
+      <h1>Rick and Morty</h1>
+      <form id="formulario">
+        <label for="personagem">Nome do Personagem:</label>
+        <input
+          type="text"
+          name="personagem"
+          id="personagem"
+          placeholder="Digite o nome do personagem"
+        />
         <button>Buscar</button>
-    </form>
+        <button type="button" id="listarTodos">Listar Todos</button>
+      </form>
+    </header>
 
-    <section id="cards">
-        
-    </section>
+    <main>
+      <section id="cards">
+        <!-- Cards serão inseridos aqui -->
+      </section>
 
-    <button class="VerMais">Ver mais</button>
+      <button class="VerMais" style="display: none">Ver mais</button>
+      <p
+        id="mensagemErro"
+        style="color: red; text-align: center; margin-top: 10px"
+      ></p>
+    </main>
+
+    <footer>
+      <!-- Informações de rodapé, créditos, etc. -->
+    </footer>
 
     <script src="./script.js"></script>
-</body>
+  </body>
 </html>

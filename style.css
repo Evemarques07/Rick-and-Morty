@@ -1,71 +1,128 @@
-body{
-    background-color: rgb(85, 152, 162);
-}
-.VerMais {
-    display: block;
-    margin: 20px auto;
-    padding: 10px 20px;
-    background-color: #4CAF50; 
-    color: white; 
-    border: none; 
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s; 
+/* style.css */
+
+body {
+  background-color: #f0f0f0;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-.VerMais:hover {
-    background-color: #45a049; 
+header {
+  background-color: #282c34;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+}
+
+h1 {
+  margin-bottom: 10px;
 }
 
 #formulario {
-    max-width: 700px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
+#formulario label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+#formulario input[type="text"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  width: 100%;
+  max-width: 300px;
+}
+
+#formulario button {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 5px;
+}
+
+#formulario button:hover {
+  background-color: #3e8e41;
+}
+
+main {
+  padding: 20px;
+}
+
 #cards {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    max-width: 90vw;
-    margin: 0px auto;
-    border-radius: 30%;
-}
-.card{
-    display: flex;
-    background-color: black;
-    border-radius: 6px;
-    padding: 5px;
-    gap: 10px;
-}
-img{
-    border-radius: 8px;
-    max-width: 200px;
-}
-p{
-    color: rgb(255, 233, 45);
-}
-h2{
-    color: rgb(85, 152, 162);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.nome{
-    color: #fff;
+.card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
 }
 
-.spanNome{
-    font-size: 16px;
-    color: rgb(85, 152, 162);
+.card:hover {
+  transform: translateY(-5px);
 }
-.spanEspecie{
-    color: rgb(85, 152, 162);
+
+.card img {
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid #ddd;
 }
-.spanStatus{
-    color: rgb(85, 152, 162);
+
+.card-content {
+  padding: 15px;
 }
-.spanLoc{
-    color: rgb(85, 152, 162);
+
+.card-content h2 {
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.card-content p {
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.VerMais {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.VerMais:hover {
+  background-color: #0056b3;
+}
+
+footer {
+  text-align: center;
+  padding: 20px 0;
+  background-color: #282c34;
+  color: white;
 }

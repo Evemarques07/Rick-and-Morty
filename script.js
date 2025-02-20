@@ -1,79 +1,90 @@
+const formulario = document.querySelector("#formulario");
+const personagemInput = document.querySelector("#personagem");
+const sectionCards = document.querySelector("#cards");
+const botaoVerMais = document.querySelector(".VerMais");
+const mensagemErro = document.querySelector("#mensagemErro");
+const botaoListarTodos = document.querySelector("#listarTodos");
 
-const formulario = document.querySelector("#formulario")
-const personagem = document.querySelector("#usuario")
-const sectionCards = document.querySelector("#cards")
-const botao_VerMais = document.querySelector(".VerMais")
-
-const error = document.createElement("p")
+let paginaAtual = null;
 
 async function buscarPersonagens(url) {
-    try {
-        const request = await fetch(url)
-        const response = await request.json()
-        console.log(response)
-        if (response.error || response.results.length === 0) { 
-            error.textContent = "Personagem não encontrado"
-        } else {
-            error.textContent = ""
-            response.results.forEach((personagem) => {
-                const card = criarCard(personagem)
-                sectionCards.appendChild(card)
-            })
-            if (response.info.next) {
-                botao_VerMais.style.display = "block"
-                botao_VerMais.id = response.info.next
-            } else {
-                botao_VerMais.style.display = "none"
-            }
-        }
-        personagem.value = ""
-        personagem.focus()
-    } catch (error) {
-        console.log(error)
+  try {
+    const resposta = await fetch(url);
+    const dados = await resposta.json();
+
+    if (dados.error) {
+      throw new Error(dados.error);
     }
+
+    if (dados.results.length === 0) {
+      throw new Error("Nenhum personagem encontrado.");
+    }
+
+    sectionCards.innerHTML = "";
+    dados.results.forEach((personagem) => {
+      const card = criarCard(personagem);
+      sectionCards.appendChild(card);
+    });
+
+    if (dados.info.next) {
+      botaoVerMais.style.display = "block";
+      paginaAtual = dados.info.next;
+    } else {
+      botaoVerMais.style.display = "none";
+      paginaAtual = null;
+    }
+
+    mensagemErro.textContent = "";
+    personagemInput.value = "";
+    personagemInput.focus();
+  } catch (erro) {
+    console.error("Erro na busca:", erro);
+    sectionCards.innerHTML = "";
+    botaoVerMais.style.display = "none";
+    mensagemErro.textContent = erro.message;
+  }
 }
 
 function criarCard(personagem) {
-    const card = document.createElement("div")
-    card.classList.add("card")
+  const card = document.createElement("div");
+  card.classList.add("card");
 
-    const foto_do_personagem = document.createElement("img")
-    foto_do_personagem.src = personagem.image
-    foto_do_personagem.alt = "Foto do perfil do Personagem"
-    foto_do_personagem.width = "300"
+  card.innerHTML = `
+        <img src="${personagem.image}" alt="Foto de ${personagem.name}">
+        <div class="card-content">
+            <h2>${personagem.name}</h2>
+            <p>Espécie: ${personagem.species}</p>
+            <p>Status: ${personagem.status}</p>
+            <p>Localização: ${personagem.location.name}</p>
+        </div>
+    `;
 
-    const card_infos = document.createElement("div")
-    const nome_do_personagem = document.createElement("h2")
-    nome_do_personagem.classList.add("nome")
-    const especie_do_personagem = document.createElement("p")
-    const status_do_personagem = document.createElement("p")
-    const localizacao_do_personagem = document.createElement("p")
-    nome_do_personagem.innerHTML = `Nome: <span class="spanNome"> ${personagem.name} </span>` 
-    especie_do_personagem.innerHTML = `Espécie: <span class="spanEspecie"> ${personagem.species} </span>`
-    status_do_personagem.innerHTML = `Status: <span class="spanStatus"> ${personagem.status} </span>`
-    localizacao_do_personagem.innerHTML = `Localização: <span class="spanLoc"> ${personagem.location.name} </span>` || "Desconhecido"
-
-    card_infos.append(nome_do_personagem, especie_do_personagem, status_do_personagem, localizacao_do_personagem)
-
-    card.append(foto_do_personagem, card_infos, error)
-    
-    return card
+  return card;
 }
 
-botao_VerMais.addEventListener("click", function(e) {
-    const px_pagina = e.target.id
-    if (px_pagina) {
-        buscarPersonagens(px_pagina)
-    }
-})
+botaoVerMais.addEventListener("click", () => {
+  if (paginaAtual) {
+    buscarPersonagens(paginaAtual);
+  }
+});
 
-formulario.addEventListener("submit", function(e) {
-    e.preventDefault()
-    sectionCards.innerHTML = ""
-    buscarPersonagens(`https://rickandmortyapi.com/api/character/?name=${personagem.value}`)
-})
+formulario.addEventListener("submit", (evento) => {
+  evento.preventDefault();
+  const nomePersonagem = personagemInput.value.trim();
 
+  if (nomePersonagem) {
+    buscarPersonagens(
+      `https://rickandmortyapi.com/api/character/?name=${nomePersonagem}`
+    );
+  } else {
+    mensagemErro.textContent = "Por favor, digite o nome de um personagem.";
+    sectionCards.innerHTML = "";
+    botaoVerMais.style.display = "none";
+  }
+});
 
+botaoListarTodos.addEventListener("click", () => {
+  buscarPersonagens("https://rickandmortyapi.com/api/character");
+});
 
-
-buscarPersonagens("https://rickandmortyapi.com/api/character/?name=")
+buscarPersonagens("https://rickandmortyapi.com/api/character");
